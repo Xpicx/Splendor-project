@@ -1,77 +1,38 @@
-public class DevCard implements Displayable {
-    
+
+public abstract class Player implements Displayable {
+
+    /* --- Stringers --- */
+   
+     
     public String[] toStringArray(){
-        /** EXAMPLE
-         * ┌────────┐
-         * │①    ♠S│
-         * │        │
-         * │        │
-         * │2 ♠S    │
-         * │2 ♣E    │
-         * │3 ♥R    │
-         * └────────┘
+        /** EXAMPLE. The number of resource tokens is shown in brackets (), and the number of cards purchased from that resource in square brackets [].
+         * Player 1: Camille
+         * ⓪pts
+         * 
+         * ♥R (0) [0]
+         * ●O (0) [0]
+         * ♣E (0) [0]
+         * ♠S (0) [0]
+         * ♦D (0) [0]
          */
-        String pointStr = "  ";
-        String[] cardStr = {}; //-- ASUPPRIMER
-        /*
-         * Ce code est à décommenter une fois que la classe DevCard a été implémentée
-        if(getPoints()>0){
+        String pointStr = " ";
+        String[] strPlayer = new String[8];
+         /*
+            * A decommenter une fois la classe implémentée
+        if(points>0){
             pointStr = new String(new int[] {getPoints()+9311}, 0, 1);
+        }else{
+            pointStr = "\u24EA";
         }
-        String[] cardStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510",
-                            "\u2502"+pointStr+"    "+resourceType.toSymbol()+"\u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"};
-        //update cost of the repr
-        int i=6;
-        for(ACOMPLETER){ //-- parcourir l'ensemble des resources (res)en utilisant l'énumération Resource
-            if(getCost().getNbResource(res)>0){
-                cardStr[i] = "\u2502"+getCost().getNbResource(res)+" "+res.toSymbol()+"    \u2502";
-                i--;
-            }
-        } */
-        return cardStr;
-    }
 
-    public static String[] noCardStringArray(){
-        /** EXAMPLE
-         * ┌────────┐
-         * │ \    / │
-         * │  \  /  │
-         * │   \/   │
-         * │   /\   │
-         * │  /  \  │
-         * │ /    \ │
-         * └────────┘
-         */
-        String[] cardStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510",
-                            "\u2502 \\    / \u2502",
-                            "\u2502  \\  /  \u2502",
-                            "\u2502   \\/   \u2502",
-                            "\u2502   /\\   \u2502",
-                            "\u2502  /  \\  \u2502",
-                            "\u2502 /    \\ \u2502",
-                            "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"};
         
-        return cardStr;
-    }
-
-    public String toString(){
-        String cardStr = "";
-        /*
-         * Ce code est à décommenter une fois que la classe DevCard a été implémentée
-              
-        cardStr = getPoints()+"pts, type "+resourceType.toSymbol()+" | coût: ";
+        strPlayer[0] = "Player "+(id+1)+": "+name;
+        strPlayer[1] = pointStr + "pts";
+        strPlayer[2] = "";
         for(ACOMPLETER){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
-            if(getCost().getNbResource(res)>0){
-                cardStr += getCost().getNbResource(res)+res.toSymbol()+" ";
-            }
+            strPlayer[3+(Resource.values().length-1-res.ordinal())] = res.toSymbol() + " ("+resources.getNbResource(res)+") ["+getResFromCards(res)+"]";
         }
         */
-        return cardStr;
+        return strPlayer;
     }
 }
