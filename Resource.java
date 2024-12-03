@@ -1,12 +1,9 @@
-import java.util.HashMap;
-
 public enum Resource {
     DIAMOND,
     SAPPHIRE,
     EMERALD,
     ONYX,
     RUBY;
-    HashMap<String, Integer> resources = new HashMap<>();
     
     public String toString(){
         switch(this){
@@ -40,9 +37,5 @@ public enum Resource {
             default:
                 return "";
         }
-    }
-    
-    public int getNbResource(Resource resource) {
-        return resources.get(resource);
     }
 }
