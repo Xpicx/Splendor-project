@@ -1,6 +1,10 @@
-
+import java.util.ArrayList;
 public abstract class Player implements Displayable {
-
+    private int id;
+    private String name;
+    private int points;
+    private ArrayList<DevCard> purchasedCards;
+    
     /* --- Stringers --- */
    
      
@@ -34,5 +38,52 @@ public abstract class Player implements Displayable {
         }
         */
         return strPlayer;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public int getPoints(){
+        return points;
+    }
+    
+    public int getNbTokens(){
+        return ;
+    }
+    
+    public int getNbPurchasedCards(){
+        return purchasedCards.size();
+    }
+    
+    public int getNbResource(){
+        return ;
+    }
+    
+    public int getAvailableResources(){
+        return ;
+    }
+    
+    public int getResFromCards(){
+        return ;
+    }
+    
+    public void updateNbResource(){
+        
+    }
+    
+    public void updatePoints(int v){
+        points += v;
+    }
+    
+    public void addPurchasedCard(DevCard card){
+        purchasedCards.add(card);
+    }
+    
+    public Boolean canBuyCard(){
+        if(){
+            return True;
+        }
+        return False;
     }
 }
