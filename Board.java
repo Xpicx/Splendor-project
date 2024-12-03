@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.util.Stack;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Set;
 import java.util.Collections;
