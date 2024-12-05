@@ -50,11 +50,7 @@ public abstract class Player implements Displayable {
     }
     
     public int getNbTokens(){
-        res = 0;
-        for(int i = 0; i < resources.length; i++){
-            res += resources[i];
-        }
-        return res;
+        return Resources.getNbResource(resources);
     }
     
     public int getNbPurchasedCards(){
@@ -62,19 +58,26 @@ public abstract class Player implements Displayable {
     }
     
     public int getNbResource(String type){
-        return resources.type;
+        return Resources.getNbResource(type);
     }
     
     public Resources getAvailableResources(){
         return resources;
     }
     
-    public int getResFromCards(){
-        return ;
+    public int getResFromCards(String type){
+        for(int i = 0; i < purchasedCards.size(); i++){
+            int res = 0;
+            DevCard card = purchasedCards.get(i);
+            if(card.getResourceType() == type){
+                res += 1;
+            }
+        }
+        return res;
     }
     
-    public void updateNbResource(){
-        
+    public void updateNbResource(String type, int i){
+        Resources.updateNbResource(type, i);
     }
     
     public void updatePoints(int v){
@@ -85,10 +88,9 @@ public abstract class Player implements Displayable {
         purchasedCards.add(card);
     }
     
-    public Boolean canBuyCard(){
-        if(){
-            return True;
-        }
-        return False;
+    public Boolean canBuyCard(DevCard card){
+        
+        
+        return ;
     }
 }
