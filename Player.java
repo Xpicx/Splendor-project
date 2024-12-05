@@ -4,6 +4,7 @@ public abstract class Player implements Displayable {
     private String name;
     private int points;
     private ArrayList<DevCard> purchasedCards;
+    private Resources resources;
     
     /* --- Stringers --- */
    
@@ -49,19 +50,23 @@ public abstract class Player implements Displayable {
     }
     
     public int getNbTokens(){
-        return ;
+        res = 0;
+        for(int i = 0; i < resources.length; i++){
+            res += resources[i];
+        }
+        return res;
     }
     
     public int getNbPurchasedCards(){
         return purchasedCards.size();
     }
     
-    public int getNbResource(){
-        return ;
+    public int getNbResource(String type){
+        return resources.type;
     }
     
-    public int getAvailableResources(){
-        return ;
+    public Resources getAvailableResources(){
+        return resources;
     }
     
     public int getResFromCards(){
