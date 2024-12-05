@@ -39,6 +39,10 @@ public class Resources {
         return result;
     }
     
+    public int getNbResource(Resource resource) {
+        return resources[resource.ordinal()];
+    }    
+        
     public void setNbResource(String resource, int quantity) {
         if (quantity > 0) {
             if (resource == "DIAMOND") {
