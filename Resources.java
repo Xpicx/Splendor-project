@@ -12,27 +12,80 @@ public class Resources {
     
     public Resources(int coutDiamond, int coutSapphire, int coutEmerald, int coutRuby, int coutOnyx) {
         resources = new int[5];
-        setNbResource(Resource.DIAMOND, coutDiamond);
-        setNbResource(Resource.SAPPHIRE, coutSapphire);
-        setNbResource(Resource.EMERALD, coutEmerald);
-        setNbResource(Resource.RUBY, coutRuby);
-        setNbResource(Resource.ONYX, coutOnyx);
+        setNbResource("DIAMOND", coutDiamond);
+        setNbResource("SAPPHIRE", coutSapphire);
+        setNbResource("EMERALD", coutEmerald);
+        setNbResource("RUBY", coutRuby);
+        setNbResource("ONYX", coutOnyx);
     }
     
-    public int getNbResource(Resource resource) {
-        return resources[resource.ordinal()];
+    public int getNbResource(String resource) {
+        int result = 0;
+        if (resource == "DIAMOND") {
+            result = resources[0];
+        }
+        if (resource == "SAPPHIRE") {
+            result = resources[1];
+        }
+        if (resource == "EMERALD") {
+            result = resources[2];
+        }
+        if (resource == "RUBY") {
+            result = resources[3];
+        }
+        if (resource == "ONYX") {
+            result = resources[4];
+        }
+        return result;
     }
     
-    public void setNbResource(Resource resource, int quantity) {
+    public void setNbResource(String resource, int quantity) {
         if (quantity > 0) {
-            resources[resource.ordinal()] = quantity;
+            if (resource == "DIAMOND") {
+                resources[0] = quantity;
+            }
+            if (resource == "SAPPHIRE") {
+                resources[1] = quantity;
+            }
+            if (resource == "EMERALD") {
+                resources[2] = quantity;
+            }
+            if (resource == "RUBY") {
+                resources[3] = quantity;
+            }
+            if (resource == "ONYX") {
+                resources[4] = quantity;
+            }
         }
     }
     
-    public void updateNbResource(Resource resource, int quantity) {
-        if (resources[resource.ordinal()] + quantity >= 0) {
-            resources[resource.ordinal()] += quantity;
+    public void updateNbResource(String resource, int quantity) {
+        if (resource == "DIAMOND") {
+            if (resources[0] + quantity >= 0) {
+                resources[0] += quantity;
+            }
         }
+        if (resource == "SAPPHIRE") {
+            if (resources[1] + quantity >= 0) {
+                resources[1] += quantity;
+            }
+        }
+        if (resource == "EMERALD") {
+            if (resources[2] + quantity >= 0) {
+                resources[2] += quantity;
+            }
+        }
+        if (resource == "RUBY") {
+            if (resources[3] + quantity >= 0) {
+                resources[3] += quantity;
+            }
+        }
+        if (resource == "ONYX") {
+            if (resources[4] + quantity >= 0) {
+                resources[4] += quantity;
+            }
+        }
+    
     }
     
     public ArrayList<Resource> getAvailableResources() {
