@@ -1,11 +1,11 @@
 public class DevCard implements Displayable {
     private int niveaux;
-    private Ressources ressources;
+    private Resources cost;
     private int points;
-    private Resource bonus;
+    private Resource resourceType;
     
     public DevCard(int niv,int coutDIAMOND,int coutSAPPHIRE,int coutEMERALD,int coutRUBY,int outONYX,int point){
-        ressources=new Resource(coutDIAMOND,coutSAPPHIRE,coutEMERALD,coutRUBY,outONYX);
+        cost=new Resources(coutDIAMOND,coutSAPPHIRE,coutEMERALD,coutRUBY,outONYX);
         niveaux=niv;
         this.points=point;
     }
@@ -13,8 +13,8 @@ public class DevCard implements Displayable {
     public int getNiveaux(){
         return niveaux;
     }
-    public Resource getRessources(){
-        return ressources;
+    public Resources getCost(){
+        return cost;
     }
     
     public int getPoints(){
@@ -35,7 +35,7 @@ public class DevCard implements Displayable {
          * └────────┘
          */
         String pointStr = "  ";
-        String[] cardStr = {}; 
+        
         if(getPoints()>0){
             pointStr = new String(new int[] {getPoints()+9311}, 0, 1);
         }
@@ -49,7 +49,8 @@ public class DevCard implements Displayable {
                             "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"};
         //update cost of the repr
         int i=6;
-        for(Ressources ressources:res){ //-- parcourir l'ensemble des resources (res)en utilisant l'énumération Resource
+        
+        for(Resource res:Resource.values()){ //-- parcourir l'ensemble des resources (res)en utilisant l'énumération Resource
             if(getCost().getNbResource(res)>0){
                 cardStr[i] = "\u2502"+getCost().getNbResource(res)+" "+res.toSymbol()+"    \u2502";
                 i--;
@@ -85,7 +86,7 @@ public class DevCard implements Displayable {
         String cardStr = "";
             
         cardStr = getPoints()+"pts, type "+resourceType.toSymbol()+" | coût: ";
-        for(Ressources ressources:res){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        for(Resource res:Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             if(getCost().getNbResource(res)>0){
                 cardStr += getCost().getNbResource(res)+res.toSymbol()+" ";
             }
