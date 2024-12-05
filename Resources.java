@@ -10,6 +10,15 @@ public class Resources {
         resources = new int[5];
     }
     
+    public Resources(int coutDiamond, int coutSapphire, int coutEmerald, int coutRuby, int coutOnyx) {
+        resources = new int[5];
+        setNbResource(Resource.DIAMOND, coutDiamond);
+        setNbResource(Resource.SAPPHIRE, coutSapphire);
+        setNbResource(Resource.EMERALD, coutEmerald);
+        setNbResource(Resource.RUBY, coutRuby);
+        setNbResource(Resource.ONYX, coutOnyx);
+    }
+    
     public int getNbResource(Resource resource) {
         return resources[resource.ordinal()];
     }
@@ -36,3 +45,4 @@ public class Resources {
         return result;
     }
 }
+
