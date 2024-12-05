@@ -38,6 +38,9 @@ public class DevCard implements Displayable {
         return points;
     }
     
+    public Resource getResourceType(){
+        return resourceType;
+    }
     
     
     public String[] toStringArray(){
