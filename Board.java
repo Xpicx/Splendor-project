@@ -9,7 +9,50 @@ import java.util.Set;
 import java.util.Collections;
 
 public class Board implements Displayable {
-
+    private DevCard[][] visibleCards;
+    private ArrayList<Stack<DevCard>> stackCards;
+    private Resources resourcesOnBoard;
+    
+    
+    public Board(int nbPlayer) {
+        //initialisation du nombre de jetons en fonction du nombre de joueurs
+        if (nbPlayer > 1 && nbPlayer < 5) {
+            if (nbPlayer == 2) {
+                resourcesOnBoard = new Resources(4, 4, 4, 4, 4);
+            } else if (nbPlayer == 3) {
+                resourcesOnBoard = new Resources(5, 5, 5, 5, 5);
+            } else {
+                resourcesOnBoard = new Resources(7, 7, 7, 7, 7);
+            }
+        }
+        
+        //initialisation des trois paquets de cartes
+        
+        //initialisation des cartes visibles
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                visibleCards[i][j] = stackCards.get(0).pop();
+            }
+        }
+    }
+    
+    public int getNbResource(String resource) {
+        return resourcesOnBoard.getNbResource(resource);
+    }
+    
+    public void setNbResource(String resource, int value) {
+        resourcesOnBoard.setNbResource(resource, value);
+    }
+    
+    public void updateNbResource(String resource, int value) {
+        resourcesOnBoard.updateNbResource(resource, value);
+    }
+    
+    public ArrayList<Resource> getAvailableResources() {
+        return resourcesOnBoard.getAvailableResources();
+    }
+    
+    
     /* --- Stringers --- */
 
     private String[] deckToStringArray(int tier){
