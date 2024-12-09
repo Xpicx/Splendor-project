@@ -99,7 +99,21 @@ public class Board implements Displayable {
     public ArrayList<Resource> getAvailableResources() {
         return resourcesOnBoard.getAvailableResources();
     }
+    public DevCard getCard(int i, int j) {
+        return visibleCards[i][j];
+    }
     
+    public void updateCard(DevCard card) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (visibleCards[i][j].equals(card)) {
+                if (stackCards.get(card.getNiveaux()).isEmpty()) {
+                    
+                }
+            }
+        }
+        
+    }
     
     /* --- Stringers --- */
 
