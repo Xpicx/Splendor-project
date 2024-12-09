@@ -6,9 +6,14 @@ public abstract class Player implements Displayable {
     private ArrayList<DevCard> purchasedCards;
     private Resources resources;
     
+    public Player(int id, String name){
+        this.id = id;
+        this.name = name;
+        purchasedCards = new ArrayList<DevCard>();
+        points = 0;
+        resources = new Resources(0,0,0,0,0);
+    }
     /* --- Stringers --- */
-   
-     
     public String[] toStringArray(){
         /** EXAMPLE. The number of resource tokens is shown in brackets (), and the number of cards purchased from that resource in square brackets [].
          * Player 1: Camille
@@ -64,21 +69,32 @@ public abstract class Player implements Displayable {
         return purchasedCards.size();
     }
     
-    public int getNbResource(String type){
-        return resources.getNbResource(type);
+    public int getNbResource(String resource){
+        return resources.getNbResource(resource);
     }
     
     public Resources getAvailableResources(){
         return resources;
     }
     
-    public int getResFromCards(Resource resource){
+    public int getResFromCards(Resource type){
         int res = 0;
         for(int i = 0; i < purchasedCards.size(); i++){
             DevCard card = purchasedCards.get(i);
-            Resource type = card.getResourceType();
-            if( type == resource){
-                res += 1;
+            if (type.equals("DIAMOND")) {
+                 = Resource.DIAMOND;
+            }
+            if (type.equals("SAPPHIRE")) {
+                5 = Resource.SAPPHIRE;
+            }
+            if (type.equals("EMERALD")) {
+                 = Resource.EMERALD;
+            }
+            if (type.equals("RUBY")) {
+                 = Resource.RUBY;
+            }
+            if (type.equals("ONYX")) {
+                 = Resource.ONYX;
             }
         }
         return res;
