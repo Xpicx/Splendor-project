@@ -22,8 +22,8 @@ public abstract class Player implements Displayable {
          */
         String pointStr = " ";
         String[] strPlayer = new String[8];
-         /*
-            * A decommenter une fois la classe implémentée
+         
+            /* A decommenter une fois la classe implémentée */
         if(points>0){
             pointStr = new String(new int[] {getPoints()+9311}, 0, 1);
         }else{
@@ -34,10 +34,10 @@ public abstract class Player implements Displayable {
         strPlayer[0] = "Player "+(id+1)+": "+name;
         strPlayer[1] = pointStr + "pts";
         strPlayer[2] = "";
-        for(ACOMPLETER){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+        for(Resource res:Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             strPlayer[3+(Resource.values().length-1-res.ordinal())] = res.toSymbol() + " ("+resources.getNbResource(res)+") ["+getResFromCards(res)+"]";
         }
-        */
+        
         return strPlayer;
     }
     
@@ -50,7 +50,14 @@ public abstract class Player implements Displayable {
     }
     
     public int getNbTokens(){
-        return Resources.getNbResource(resources);
+        int res = 0;
+        res += resources.getNbResource("DIAMOND");
+        res += resources.getNbResource("SAPPHIRE");
+        res += resources.getNbResource("EMERALD");
+        res += resources.getNbResource("RUBY");
+        res += resources.getNbResource("ONYX");  
+        return res;
+        
     }
     
     public int getNbPurchasedCards(){
@@ -58,18 +65,19 @@ public abstract class Player implements Displayable {
     }
     
     public int getNbResource(String type){
-        return Resources.getNbResource(type);
+        return resources.getNbResource(type);
     }
     
     public Resources getAvailableResources(){
         return resources;
     }
     
-    public int getResFromCards(String type){
+    public int getResFromCards(Resource resource){
+        int res = 0;
         for(int i = 0; i < purchasedCards.size(); i++){
-            int res = 0;
             DevCard card = purchasedCards.get(i);
-            if(card.getResourceType() == type){
+            Resource type = card.getResourceType();
+            if( type == resource){
                 res += 1;
             }
         }
@@ -77,7 +85,7 @@ public abstract class Player implements Displayable {
     }
     
     public void updateNbResource(String type, int i){
-        Resources.updateNbResource(type, i);
+        resources.updateNbResource(type, i);
     }
     
     public void updatePoints(int v){
@@ -89,8 +97,15 @@ public abstract class Player implements Displayable {
     }
     
     public Boolean canBuyCard(DevCard card){
-        
-        
-        return ;
+        if(card.getCost().getNbResource("DIAMOND") <= resources.getNbResource("DIAMOND") &&
+        card.getCost().getNbResource("SAPPHIRE") <= resources.getNbResource("SAPPHIRE" ) &&
+        card.getCost().getNbResource("EMERALD") <= resources.getNbResource("EMERALD") &&
+        card.getCost().getNbResource("RUBY") <= resources.getNbResource("RUBY") &&
+        card.getCost().getNbResource("ONYX") <= resources.getNbResource("ONYX")){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 }
