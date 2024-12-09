@@ -14,11 +14,14 @@ public class Board implements Displayable {
     private ArrayList<Stack<DevCard>> stackCards;
     private Resources resourcesOnBoard;
     private ArrayList<DevCard> pileCartes;
-    private ArrayList<DevCard> stackCards1;
-    private ArrayList<DevCard> stackCards2;
-    private ArrayList<DevCard> stackCards3;
     
     public Board(int nbPlayer) {
+        //initialisation de la liste contenant les piles de cartes
+        stackCards = new ArrayList<Stack<DevCard>>();
+        
+        //initialisation du tableau contenant les cartes visibles
+         visibleCards = new DevCard[3][4];
+         
         //initialisation du nombre de jetons en fonction du nombre de joueurs
         if (nbPlayer > 1 && nbPlayer < 5) {
             if (nbPlayer == 2) {
@@ -29,6 +32,7 @@ public class Board implements Displayable {
                 resourcesOnBoard = new Resources(7, 7, 7, 7, 7);
             }
         }
+        
         //lecture du fichier stat.csv
         pileCartes=new ArrayList<DevCard>();
         try
@@ -36,52 +40,48 @@ public class Board implements Displayable {
         Scanner sc=new Scanner(new File("stats.csv"));
         String ligneFichier=sc.nextLine();
         Random rand=new Random();
-        stackCards1=new ArrayList<DevCard>();
-        stackCards2=new ArrayList<DevCard>();
-        stackCards3=new ArrayList<DevCard>();
+        stackCards.add(new Stack<DevCard>());
+        stackCards.add(new Stack<DevCard>());
+        stackCards.add(new Stack<DevCard>());
         for(int i=0;i<98;i++){
             ligneFichier=sc.nextLine();
             String infoCarte[]=ligneFichier.split(",");
-            System.out.println(infoCarte[7]);
             if(infoCarte[7]!="NOBLE"){
-            DevCard carte=new DevCard(Integer.parseInt(infoCarte[0]),Integer.parseInt(infoCarte[1]),Integer.parseInt(infoCarte[2]),Integer.parseInt(infoCarte[3]),Integer.parseInt(infoCarte[4]),Integer.parseInt(infoCarte[5]),Integer.parseInt(infoCarte[6]),infoCarte[7]);
-            pileCartes.add(carte);  
+                DevCard carte=new DevCard(Integer.parseInt(infoCarte[0]),Integer.parseInt(infoCarte[1]),Integer.parseInt(infoCarte[2]),Integer.parseInt(infoCarte[3]),Integer.parseInt(infoCarte[4]),Integer.parseInt(infoCarte[5]),Integer.parseInt(infoCarte[6]),infoCarte[7]);
+                pileCartes.add(carte);  
         }
         }
+        
+        //initialisation des trois paquets de cartes
         for(int i=0;i<98;i++){
             int index=rand.nextInt(pileCartes.size());
             if(pileCartes.get(index).getNiveaux()==1){
-                stackCards1.add(pileCartes.get(index));
+                stackCards.get(0).add(pileCartes.get(index));
             }
             if(pileCartes.get(index).getNiveaux()==2){
-                stackCards2.add(pileCartes.get(index));
+                stackCards.get(1).add(pileCartes.get(index));
             }
             if(pileCartes.get(index).getNiveaux()==3){
-                stackCards3.add(pileCartes.get(index));
+                stackCards.get(2).add(pileCartes.get(index));
             }
                         
         }
-        for(int i=0;i<stackCards1.size();i++){
-            System.out.println(stackCards1.get(i));
-        }
         
+        for(int i=0;i<stackCards.get(0).size();i++){
+            System.out.println(stackCards.get(0).get(i));
+        }
         }
         catch (FileNotFoundException fnfe)
         {
             fnfe.printStackTrace();
         }
         
-         //initialisation des trois paquets de cartes
-        
         //initialisation des cartes visibles
         for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
-                visibleCards[i][j] = stackCards.get(0).pop();
+            for (int j = 0; j < 4; j++) {
+                visibleCards[i][j] = stackCards.get(i).pop();
             }
         }
-        
-        
-        
     }
     
     public int getNbResource(String resource) {
