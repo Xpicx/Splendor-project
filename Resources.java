@@ -21,19 +21,19 @@ public class Resources {
     
     public int getNbResource(String resource) {
         int result = 0;
-        if (resource == "DIAMOND") {
+        if (resource.equals("DIAMOND")) {
             result = resources[0];
         }
-        if (resource == "SAPPHIRE") {
+        if (resource.equals("SAPPHIRE")) {
             result = resources[1];
         }
-        if (resource == "EMERALD") {
+        if (resource.equals("EMERALD")) {
             result = resources[2];
         }
-        if (resource == "RUBY") {
+        if (resource.equals("RUBY")) {
             result = resources[3];
         }
-        if (resource == "ONYX") {
+        if (resource.equals("ONYX")) {
             result = resources[4];
         }
         return result;
@@ -45,46 +45,46 @@ public class Resources {
         
     public void setNbResource(String resource, int quantity) {
         if (quantity > 0) {
-            if (resource == "DIAMOND") {
+            if (resource.equals("DIAMOND")) {
                 resources[0] = quantity;
             }
-            if (resource == "SAPPHIRE") {
+            if (resource.equals("SAPPHIRE")) {
                 resources[1] = quantity;
             }
-            if (resource == "EMERALD") {
+            if (resource.equals("EMERALD")) {
                 resources[2] = quantity;
             }
-            if (resource == "RUBY") {
+            if (resource.equals("RUBY")) {
                 resources[3] = quantity;
             }
-            if (resource == "ONYX") {
+            if (resource.equals("ONYX")) {
                 resources[4] = quantity;
             }
         }
     }
     
     public void updateNbResource(String resource, int quantity) {
-        if (resource == "DIAMOND") {
+        if (resource.equals("DIAMOND")) {
             if (resources[0] + quantity >= 0) {
                 resources[0] += quantity;
             }
         }
-        if (resource == "SAPPHIRE") {
+        if (resource.equals("SAPPHIRE")) {
             if (resources[1] + quantity >= 0) {
                 resources[1] += quantity;
             }
         }
-        if (resource == "EMERALD") {
+        if (resource.equals("EMERALD")) {
             if (resources[2] + quantity >= 0) {
                 resources[2] += quantity;
             }
         }
-        if (resource == "RUBY") {
+        if (resource.equals("RUBY")) {
             if (resources[3] + quantity >= 0) {
                 resources[3] += quantity;
             }
         }
-        if (resource == "ONYX") {
+        if (resource.equals("ONYX")) {
             if (resources[4] + quantity >= 0) {
                 resources[4] += quantity;
             }
