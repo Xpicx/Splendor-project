@@ -117,9 +117,13 @@ public class Board implements Displayable {
         }
     }
 
-    public DevCard drawCard() {
-        if (
+    public DevCard drawCard(Stack stack) {
+        if (stack.isEmpty()) {
+            return null;
+        } else {
+            return stack.pop();
     }
+
     
     /* --- Stringers --- */
 
