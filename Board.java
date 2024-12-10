@@ -124,6 +124,9 @@ public class Board implements Displayable {
             return stack.pop();
     }
 
+    public boolean canGiveSameTokens(Resource resource) {
+        return 
+    }
     
     /* --- Stringers --- */
 
