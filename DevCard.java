@@ -1,12 +1,12 @@
 public class DevCard implements Displayable {
-    private int niveaux;
+    private int niveau;
     private Resources cost;
     private int points;
     private Resource resourceType;
     
     public DevCard(int niv,int coutDIAMOND,int coutSAPPHIRE,int coutEMERALD,int coutRUBY,int outONYX,int point,String type){
         cost=new Resources(coutDIAMOND,coutSAPPHIRE,coutEMERALD,coutRUBY,outONYX);
-        niveaux=niv;
+        niveau=niv;
         this.points=point;
         if (type.equals("DIAMOND")) {
             resourceType = Resource.DIAMOND;
@@ -26,8 +26,8 @@ public class DevCard implements Displayable {
         
     }
     
-    public int getNiveaux(){
-        return niveaux;
+    public int getNiveau(){
+        return niveau;
     }
     public Resources getCost(){
         return cost;
