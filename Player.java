@@ -59,8 +59,8 @@ public abstract class Player implements Displayable {
         res += resources.getNbResource("DIAMOND");
         res += resources.getNbResource("SAPPHIRE");
         res += resources.getNbResource("EMERALD");
-        res += resources.getNbResource("RUBY");
-        res += resources.getNbResource("ONYX");  
+        res += resources.getNbResource("ONYX");
+        res += resources.getNbResource("RUBY");  
         return res;
         
     }
@@ -81,20 +81,9 @@ public abstract class Player implements Displayable {
         int res = 0;
         for(int i = 0; i < purchasedCards.size(); i++){
             DevCard card = purchasedCards.get(i);
-            if (type.equals("DIAMOND")) {
-                 = Resource.DIAMOND;
-            }
-            if (type.equals("SAPPHIRE")) {
-                5 = Resource.SAPPHIRE;
-            }
-            if (type.equals("EMERALD")) {
-                 = Resource.EMERALD;
-            }
-            if (type.equals("RUBY")) {
-                 = Resource.RUBY;
-            }
-            if (type.equals("ONYX")) {
-                 = Resource.ONYX;
+            Resource cardType = card.getResourceType();
+            if (type == cardType) {
+                 res ++;
             }
         }
         return res;
@@ -116,8 +105,8 @@ public abstract class Player implements Displayable {
         if(card.getCost().getNbResource("DIAMOND") <= resources.getNbResource("DIAMOND") &&
         card.getCost().getNbResource("SAPPHIRE") <= resources.getNbResource("SAPPHIRE" ) &&
         card.getCost().getNbResource("EMERALD") <= resources.getNbResource("EMERALD") &&
-        card.getCost().getNbResource("RUBY") <= resources.getNbResource("RUBY") &&
-        card.getCost().getNbResource("ONYX") <= resources.getNbResource("ONYX")){
+        card.getCost().getNbResource("ONYX") <= resources.getNbResource("ONYX") &&
+        card.getCost().getNbResource("RUBY") <= resources.getNbResource("RUBY")){
             return true;
         }
         else{
