@@ -107,15 +107,20 @@ public class Board implements Displayable {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 if (visibleCards[i][j].equals(card)) {
-                if (stackCards.get(card.getNiveau()).isEmpty()) {
-                    visibleCards[i][j] = null;
-                } else {
-                    visibleCards[i][j] = stackCards.get(card.getNiveau()).pop();
-                }
+                    if (stackCards.get(card.getNiveau()).isEmpty()) {
+                        visibleCards[i][j] = null;
+                    } else {
+                        visibleCards[i][j] = stackCards.get(card.getNiveau()).pop();
+                    }
                 }
             }
         }
     }
+
+    public DevCard drawCard() {
+        if (
+    }
+    
     /* --- Stringers --- */
 
     private String[] deckToStringArray(int tier){
