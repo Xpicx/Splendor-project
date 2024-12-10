@@ -55,13 +55,13 @@ public class Board implements Displayable {
         //initialisation des trois paquets de cartes
         for(int i=0;i<98;i++){
             int index=rand.nextInt(pileCartes.size());
-            if(pileCartes.get(index).getNiveaux()==1){
+            if(pileCartes.get(index).getNiveau()==1){
                 stackCards.get(0).add(pileCartes.get(index));
             }
-            if(pileCartes.get(index).getNiveaux()==2){
+            if(pileCartes.get(index).getNiveau()==2){
                 stackCards.get(1).add(pileCartes.get(index));
             }
-            if(pileCartes.get(index).getNiveaux()==3){
+            if(pileCartes.get(index).getNiveau()==3){
                 stackCards.get(2).add(pileCartes.get(index));
             }
                         
@@ -107,15 +107,15 @@ public class Board implements Displayable {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 if (visibleCards[i][j].equals(card)) {
-                if (stackCards.get(card.getNiveaux()).isEmpty()) {
+                if (stackCards.get(card.getNiveau()).isEmpty()) {
                     visibleCards[i][j] = null;
                 } else {
-                    visibleCards[i][j] = stackCards.pop();
+                    visibleCards[i][j] = stackCards.get(card.getNiveau()).pop();
+                }
+                }
             }
         }
-        
     }
-    
     /* --- Stringers --- */
 
     private String[] deckToStringArray(int tier){
