@@ -20,7 +20,7 @@ public class Board implements Displayable {
         stackCards = new ArrayList<Stack<DevCard>>();
         
         //initialisation du tableau contenant les cartes visibles
-         visibleCards = new DevCard[3][4];
+        visibleCards = new DevCard[3][4];
          
         //initialisation du nombre de jetons en fonction du nombre de joueurs
         if (nbPlayer > 1 && nbPlayer < 5) {
@@ -117,15 +117,16 @@ public class Board implements Displayable {
         }
     }
 
-    public DevCard drawCard(Stack stack) {
+    public DevCard drawCard(Stack<DevCard> stack) {
         if (stack.isEmpty()) {
             return null;
         } else {
             return stack.pop();
+        }
     }
-
+    
     public boolean canGiveSameTokens(Resource resource) {
-        return 
+        return resourcesOnBoard.getNbResource(resource) <= 4;
     }
     
     /* --- Stringers --- */
