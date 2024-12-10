@@ -108,8 +108,9 @@ public class Board implements Displayable {
             for (int j = 0; j < 4; j++) {
                 if (visibleCards[i][j].equals(card)) {
                 if (stackCards.get(card.getNiveaux()).isEmpty()) {
-                    
-                }
+                    visibleCards[i][j] = null;
+                } else {
+                    visibleCards[i][j] = stackCards.pop();
             }
         }
         
