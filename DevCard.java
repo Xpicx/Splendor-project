@@ -26,17 +26,29 @@ public class DevCard implements Displayable {
         
     }
     
+    /*
+     * Renvoie le niveau (tier) de la carte.
+     */
     public int getNiveau(){
         return niveau;
     }
+
+    /*
+     * Renvoie le cout de la carte (un objet Resource)
+     */
     public Resources getCost(){
         return cost;
     }
-    
+    /*
+     * Renvoie les points que rapporte la carte.
+     */
     public int getPoints(){
         return points;
     }
-    
+
+    /*
+     * Renvoie type de la carte (la ressource 
+     */
     public Resource getResourceType(){
         return resourceType;
     }
@@ -67,8 +79,8 @@ public class DevCard implements Displayable {
                             "\u2502        \u2502",
                             "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"};
         //update cost of the repr
-        int i=6;
-        
+        int i = 6;
+             
         for(Resource res:Resource.values()){ //-- parcourir l'ensemble des resources (res)en utilisant l'énumération Resource
             if(getCost().getNbResource(res)>0){
                 cardStr[i] = "\u2502"+getCost().getNbResource(res)+" "+res.toSymbol()+"    \u2502";
