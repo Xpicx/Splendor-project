@@ -1,23 +1,26 @@
 import java.util.ArrayList;
 
 public class Resources {    
-    private int[] resources; //liste d'entiers ordonnée : resources[0] correspond à la ressource DIAMOND,
+    private int[] resources; //liste d'entiers ordonnée selon l'ordre des types de ressource dans l'énumération Resource
 
     /**
-     * Constructeur d'objets de classe Resources
+     * Constructeur par défaut : initialise toutes les ressources à 0.
      */
-    
     public Resources() {
-        resources = new int[5];
+        resources = new int[Resource.values().length];
     }
-    
+
+    /**
+     * Constructeur qui initialise toutes les ressources à partir de valeurs données.
+     */
     public Resources(int coutDiamond, int coutSapphire, int coutEmerald, int coutRuby, int coutOnyx) {
-        resources = new int[5];
+        resources = new int[Resource.values().length];
         setNbResource("DIAMOND", coutDiamond);
         setNbResource("SAPPHIRE", coutSapphire);
         setNbResource("EMERALD", coutEmerald);
         setNbResource("RUBY", coutRuby);
         setNbResource("ONYX", coutOnyx);
+        }
     }
 
     /**
