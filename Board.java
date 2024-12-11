@@ -126,8 +126,16 @@ public class Board implements Displayable {
     }
     
     public boolean canGiveSameTokens(Resource resource) {
-        return resourcesOnBoard.getNbResource(resource) <= 4;
+        r turn resourcesOnBoard.getNbResource(resource) <= 4;
     }
+
+    public boolean canGiveDiffTokens(ArrayList<Resource> resources) {
+        result = true;
+        for (int i = 0; i < resources.size(); i++) {
+            result = result && resource.get(i).canGiveSameTokens();
+        }
+        return result
+    }        
     
     /* --- Stringers --- */
 
