@@ -26,27 +26,27 @@ public class DevCard implements Displayable {
         
     }
     
-    /*
+    /**
      * Renvoie le niveau (tier) de la carte.
      */
     public int getNiveau(){
         return niveau;
     }
 
-    /*
+    /**
      * Renvoie le cout de la carte (un objet Resource)
      */
     public Resources getCost(){
         return cost;
     }
-    /*
+    /**
      * Renvoie les points que rapporte la carte.
      */
     public int getPoints(){
         return points;
     }
 
-    /*
+    /**
      * Renvoie type de la carte (la ressource 
      */
     public Resource getResourceType(){
