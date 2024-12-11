@@ -151,7 +151,7 @@ public class Board implements Displayable {
          * └────────┘ │
          *  ╲________╲│
          */
-        int nbCards = 0; //- AREMPLEACER par le nombre de cartes présentes
+        int nbCards = stackCards.get(tier);
         String[] deckStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  ",
                             "\u2502        \u2502\u2572 ",
                             "\u2502 reste: \u2502 \u2502",
@@ -169,20 +169,17 @@ public class Board implements Displayable {
          * Resources disponibles : 4♥R 4♣E 4♠S 4♦D 4●O
          */
         String[] resStr = {"Resources disponibles : "};
-        /*
-         * A decommenter
-        for(ACOMPLETER){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
+
+        for(Resource res: Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
             resStr[0] += resources.getNbResource(res)+res.toSymbol()+" ";
         }
-                 */
+                 
         resStr[0] += "        ";
         return resStr;
     }
 
     private String[] boardToStringArray(){
         String[] res = Display.emptyStringArray(0, 0);
-        /*
-         * 
 
         //Deck display
         String[] deckDisplay = Display.emptyStringArray(0, 0);
@@ -206,7 +203,7 @@ public class Board implements Displayable {
         res = Display.concatStringArray(res, resourcesToStringArray(), true);
         res = Display.concatStringArray(res, Display.emptyStringArray(35, 1, " \u250A"), false);
         res = Display.concatStringArray(res, Display.emptyStringArray(1, 54, "\u2509"), true);
-                 */
+                 
         return res;
     }
 
