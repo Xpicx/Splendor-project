@@ -1,11 +1,12 @@
 import java.util.ArrayList;
 
 public class Resources {    
-    private int[] resources;
+    private int[] resources; //liste d'entiers ordonnée : resources[0] correspond à la ressource DIAMOND,
 
     /**
      * Constructeur d'objets de classe Resources
      */
+    
     public Resources() {
         resources = new int[5];
     }
@@ -18,7 +19,10 @@ public class Resources {
         setNbResource("RUBY", coutRuby);
         setNbResource("ONYX", coutOnyx);
     }
-    
+
+    /**
+     * Renvoie la quantité disponible d'un type de ressource, passé en paramètre
+     */
     public int getNbResource(String resource) {
         int result = 0;
         if (resource.equals("DIAMOND")) {
@@ -38,11 +42,17 @@ public class Resources {
         }
         return result;
     }
-    
+
+    /**
+     * Réécriture de getNbResource, qui prends en paramètre un type de ressource
+     */
     public int getNbResource(Resource resource) {
         return resources[resource.ordinal()];
     }    
-        
+
+    /**
+     * Change la valeur d'une ressource, passée en paramètre par un entier positif ou nul, passé en paramètre.
+     */
     public void setNbResource(String resource, int quantity) {
         if (quantity > 0) {
             if (resource.equals("DIAMOND")) {
@@ -62,7 +72,11 @@ public class Resources {
             }
         }
     }
-    
+
+    /**
+     * Met a jour une ressource passée en paramètre, avec un entier passé en paramètre.
+     * Vérifie que la nouvelle valeur de la ressource est positive ou nulle.
+     */
     public void updateNbResource(String resource, int quantity) {
         if (resource.equals("DIAMOND")) {
             if (resources[0] + quantity >= 0) {
@@ -91,7 +105,10 @@ public class Resources {
         }
     
     }
-    
+
+    /**
+     * Renvoie une liste contenant les ressources pour lesquelles le quantité est supérieure à zéro
+     */
     public ArrayList<Resource> getAvailableResources() {
         ArrayList<Resource> result = new ArrayList<Resource>();
         for (int i = 0; i < resources.length; i++) {
