@@ -63,12 +63,7 @@ public class Board implements Displayable {
             }
             if(pileCartes.get(index).getNiveau()==3){
                 stackCards.get(2).add(pileCartes.get(index));
-            }
-                        
-        }
-        
-        for(int i=0;i<stackCards.get(0).size();i++){
-            System.out.println(stackCards.get(0).get(i));
+            }          
         }
         }
         catch (FileNotFoundException fnfe)
@@ -126,15 +121,15 @@ public class Board implements Displayable {
     }
     
     public boolean canGiveSameTokens(Resource resource) {
-        r turn resourcesOnBoard.getNbResource(resource) <= 4;
+        return resourcesOnBoard.getNbResource(resource) <= 4;
     }
 
     public boolean canGiveDiffTokens(ArrayList<Resource> resources) {
-        result = true;
+        boolean result = true;
         for (int i = 0; i < resources.size(); i++) {
-            result = result && resource.get(i).canGiveSameTokens();
+            result = result && canGiveSameTokens(resources.get(i));
         }
-        return result
+        return result;
     }        
     
     /* --- Stringers --- */
@@ -151,7 +146,7 @@ public class Board implements Displayable {
          * └────────┘ │
          *  ╲________╲│
          */
-        int nbCards = stackCards.get(tier);
+        int nbCards = stackCards.get(tier-1).size();
         String[] deckStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510  ",
                             "\u2502        \u2502\u2572 ",
                             "\u2502 reste: \u2502 \u2502",
@@ -171,7 +166,7 @@ public class Board implements Displayable {
         String[] resStr = {"Resources disponibles : "};
 
         for(Resource res: Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
-            resStr[0] += resources.getNbResource(res)+res.toSymbol()+" ";
+            resStr[0] += resourcesOnBoard.getNbResource(res)+res.toSymbol()+" ";
         }
                  
         resStr[0] += "        ";
@@ -189,9 +184,9 @@ public class Board implements Displayable {
 
         //Card display
         String[] cardDisplay = Display.emptyStringArray(0, 0);
-        for(ACOMPLETER){ //-- parcourir les différents niveaux de carte (i)
+        for(int i = 0; i < 3; i++){ //-- parcourir les différents niveaux de carte (i)
             String[] tierCardsDisplay = Display.emptyStringArray(8, 0);
-            for(ACOMPLETER){ //-- parcourir les 4 cartes faces visibles pour un niveau donné (j)
+            for(int j = 0; j < 4; j++){ //-- parcourir les 4 cartes faces visibles pour un niveau donné (j)
                 tierCardsDisplay = Display.concatStringArray(tierCardsDisplay, visibleCards[i][j]!=null ? visibleCards[i][j].toStringArray() : DevCard.noCardStringArray(), false);
             }
             cardDisplay = Display.concatStringArray(cardDisplay, Display.emptyStringArray(1, 40), true);
@@ -203,7 +198,7 @@ public class Board implements Displayable {
         res = Display.concatStringArray(res, resourcesToStringArray(), true);
         res = Display.concatStringArray(res, Display.emptyStringArray(35, 1, " \u250A"), false);
         res = Display.concatStringArray(res, Display.emptyStringArray(1, 54, "\u2509"), true);
-                 
+        
         return res;
     }
 
