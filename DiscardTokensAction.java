@@ -11,7 +11,7 @@ public class DiscardTokensAction implements Action
         
     }
     
-    public void process(){
+    public void process(Player joueur,Board plateau){
         
     }
     
