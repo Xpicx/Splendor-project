@@ -35,25 +35,27 @@ public class Board implements Displayable {
         
         //lecture du fichier stat.csv
         pileCartes=new ArrayList<DevCard>();
-        try
-        {
+        try {
         Scanner sc=new Scanner(new File("stats.csv"));
         String ligneFichier=sc.nextLine();
         Random rand=new Random();
         stackCards.add(new Stack<DevCard>());
         stackCards.add(new Stack<DevCard>());
         stackCards.add(new Stack<DevCard>());
-        for(int i=0;i<98;i++){
+        
+        //mélange des cartes
+        for (int i=0;i<98;i++) {
             ligneFichier=sc.nextLine();
             String infoCarte[]=ligneFichier.split(",");
-            if(infoCarte[7]!="NOBLE"){
+            //on ignore les nobles dans cette implémentation
+            if(!(infoCarte[7].equals("NOBLE"))) { 
                 DevCard carte=new DevCard(Integer.parseInt(infoCarte[0]),Integer.parseInt(infoCarte[1]),Integer.parseInt(infoCarte[2]),Integer.parseInt(infoCarte[3]),Integer.parseInt(infoCarte[4]),Integer.parseInt(infoCarte[5]),Integer.parseInt(infoCarte[6]),infoCarte[7]);
                 pileCartes.add(carte);  
-        }
+            }
         }
         
         //initialisation des trois paquets de cartes
-        for(int i=0;i<98;i++){
+        for (int i=0;i<98;i++) {
             int index=rand.nextInt(pileCartes.size());
             if(pileCartes.get(index).getNiveau()==1){
                 stackCards.get(0).add(pileCartes.get(index));
@@ -66,8 +68,7 @@ public class Board implements Displayable {
             }          
         }
         }
-        catch (FileNotFoundException fnfe)
-        {
+        catch (FileNotFoundException fnfe) {
             fnfe.printStackTrace();
         }
         
@@ -79,32 +80,48 @@ public class Board implements Displayable {
         }
     }
     
+    /**
+     * Renvoie le nombre de jetons d'une ressource donnée.
+     */
     public int getNbResource(String resource) {
         return resourcesOnBoard.getNbResource(resource);
     }
     
+    /**
+     * Change le nombre de jetons d'une ressource donnée par un entier donné.
+     */
     public void setNbResource(String resource, int value) {
         resourcesOnBoard.setNbResource(resource, value);
     }
     
+    /**
+     * Ajoute le nombre de jetons d'une ressource donnée par un entier donné.
+     */
     public void updateNbResource(String resource, int value) {
         resourcesOnBoard.updateNbResource(resource, value);
     }
     
+    /**
+     * Renvoie les ressources dont le nombre de jetons est supérieur à zéro.
+     */
     public ArrayList<Resource> getAvailableResources() {
         return resourcesOnBoard.getAvailableResources();
     }
+    
     public DevCard getCard(int i, int j) {
         return visibleCards[i][j];
     }
     
+    /**
+     * Trouve la carte donnée en paramètre parmi les cartes visibles et la remplace par le carte du paquet.
+     */
     public void updateCard(DevCard card) {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 if (visibleCards[i][j].equals(card)) {
                     if (stackCards.get(card.getNiveau()).isEmpty()) {
                         visibleCards[i][j] = null;
-                    } else {
+                    } else if (!(stackCards.get(card.getNiveau()).isEmpty())) {
                         visibleCards[i][j] = stackCards.get(card.getNiveau()).pop();
                     }
                 }
@@ -112,6 +129,9 @@ public class Board implements Displayable {
         }
     }
 
+    /**
+     * Retire et renvoie la carte d'une pile de carte donnée.
+     */
     public DevCard drawCard(Stack<DevCard> stack) {
         if (stack.isEmpty()) {
             return null;
@@ -120,10 +140,16 @@ public class Board implements Displayable {
         }
     }
     
+    /**
+     * Vérifie qu'il reste assez de jetons d'un type donné pour en retirer.
+     */
     public boolean canGiveSameTokens(Resource resource) {
         return resourcesOnBoard.getNbResource(resource) <= 4;
     }
-
+    
+    /**
+     * Vérifie qu'il reste assez de jetons pour plusieurs type donnés pour en retirer.
+     */
     public boolean canGiveDiffTokens(ArrayList<Resource> resources) {
         boolean result = true;
         for (int i = 0; i < resources.size(); i++) {
