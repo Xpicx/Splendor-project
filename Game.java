@@ -1,10 +1,12 @@
 /*
- * @author	Corentin Dufourg
+ * @author    Corentin Dufourg
  * @version     1.1
  * @since       1.0
  */
 
 import java.util.List;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
     /* L'affichage et la lecture d'entrée avec l'interface de jeu se fera entièrement via l'attribut display de la classe Game.
@@ -28,14 +30,23 @@ public class Game {
         display.close();
     }
 
-    public Game(int nbOfPlayers){
-        /*
-         * ACOMPLETER
-         */
+    public Game(int nbOfPlayers) throws IllegalArgumentException{
+        players=new ArrayList<Player>();
+        if (nbOfPlayers<2 || nbOfPlayers>4){
+            throw new IllegalArgumentException();
+        }else{
+            HumanPlayer human=new HumanPlayer(1,"Humain");
+
+            //Créer un nombre n de robot en fonction du nombre de joueur
+            for (int i =0;i<nbOfPlayers-1;i++){
+                DumbRobotPlayer robot=new DumbRobotPlayer(i,"Robot"+i); 
+                players.add(robot);
+            }
+        }
     }
 
     public int getNbPlayers(){
-        return 0; //-- AMODIFIER
+        return players.size();
     }
 
     private void display(int currentPlayer){
@@ -56,35 +67,58 @@ public class Game {
     }
 
     public void play(){
-        /*
-         * ACOMPLETER
-         */
+        while(!isGameOver()){
+            for (int i=0;i<players.size();i++){
+
+                if (players.get(i).getNbTokens()<=10){  
+                    move(players.get(i));
+                }else{
+                    discardToken(players.get(i));
+                }
+            }
+        }
     }
 
     private void move(Player player){
-        /*
-         * ACOMPLETER
-         */
+
+        player.choosAction(board);
     }
 
     private void discardToken(Player player){
-        /*
-         * ACOMPLETER
-         */
+        DiscardTokensAction discard=new DiscardTokensAction();
+        discard.process(player,board);
     }
 
     public boolean isGameOver(){
-        /*
-         * ACOMPLETER
-         */
-        return false; //-- AMODIFIER
+        for(int i=0; i<players.size();i++){
+            if(players.get(i).getPoints()>=15){
+                return true;
+            }
+        }
+        return false;
     }
 
     private void gameOver(){
-        /*
-         * ACOMPLETER
-         */
+        System.out.println("Bravo!");
+        ArrayList<String> gagnants=new ArrayList<String>();
+        for(int i=0; i<players.size();i++){
+            if(players.get(i).getPoints()>=15){
+                gagnants.add(players.get(i).getName());
+            }
+        }
+        if(gagnants.size()>1){
+            System.out.println(gagnants.get(0));
+        }else{
+            String gagnant="";
+            for(int i=1; i<gagnants.size();i++){
+                if(gagnants.get(i).getNbPurchasedCards()<gagnants.get(i-1).getNbPurchasedCards()){
+                    gagnant=gagnants.get(i).getName();
+                }else{
+                    gagnant=gagnants.get(i-1).getName();
+                }
+            }
+            System.out.println(gagnant);
+        }
+
     }
-
-
 }
