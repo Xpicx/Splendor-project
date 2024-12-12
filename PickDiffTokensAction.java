@@ -5,7 +5,7 @@
  * @author (votre nom)
  * @version (un numéro de version ou une date)
  */
-public class PickDiffTokensAction
+public class PickDiffTokensAction implements Action
 {
     private String type1;
     private String type2;
