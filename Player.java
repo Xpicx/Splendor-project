@@ -113,4 +113,6 @@ public abstract class Player implements Displayable {
             return false;
         }
     }
+    
+    public abstract Action chooseAction(Board board);
 }
