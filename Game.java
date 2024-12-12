@@ -65,6 +65,7 @@ public class Game {
         display.outBoard.clean();
         display.outBoard.println(String.join("\n", mainDisplay));
     }
+    
 
     public void play(){
         while(!isGameOver()){
