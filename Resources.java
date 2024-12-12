@@ -21,7 +21,7 @@ public class Resources {
         setNbResource("RUBY", coutRuby);
         setNbResource("ONYX", coutOnyx);
         }
-    }
+    
 
     /**
      * Renvoie la quantité disponible d'un type de ressource, passé en paramètre
