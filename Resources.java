@@ -1,128 +1,128 @@
-public class DevCard implements Displayable {
-    private int niveau;
-    private Resources cost;
-    private int points;
-    private Resource resourceType;
-    
-    public DevCard(int niv,int coutDIAMOND,int coutSAPPHIRE,int coutEMERALD,int coutRUBY,int outONYX,int point,String type){
-        cost=new Resources(coutDIAMOND,coutSAPPHIRE,coutEMERALD,coutRUBY,outONYX);
-        niveau=niv;
-        this.points=point;
-        if (type.equals("DIAMOND")) {
-            resourceType = Resource.DIAMOND;
-        }
-        if (type.equals("SAPPHIRE")) {
-            resourceType = Resource.SAPPHIRE;
-        }
-        if (type.equals("EMERALD")) {
-            resourceType = Resource.EMERALD;
-        }
-        if (type.equals("RUBY")) {
-            resourceType = Resource.RUBY;
-        }
-        if (type.equals("ONYX")) {
-            resourceType = Resource.ONYX;
-        }
-        
-    }
-    
+import java.util.ArrayList;
+
+public class Resources {    
+    private int[] resources; //liste d'entiers ordonnée selon l'ordre des types de ressource dans l'énumération Resource
+
     /**
-     * Renvoie le niveau (tier) de la carte.
+     * Constructeur par défaut : initialise toutes les ressources à 0.
      */
-    public int getNiveau(){
-        return niveau;
+    public Resources() {
+        resources = new int[Resource.values().length];
     }
 
     /**
-     * Renvoie le cout de la carte (un objet Resource)
+     * Constructeur qui initialise toutes les ressources à partir de valeurs données.
      */
-    public Resources getCost(){
-        return cost;
-    }
-    /**
-     * Renvoie les points que rapporte la carte.
-     */
-    public int getPoints(){
-        return points;
+    public Resources(int coutDiamond, int coutSapphire, int coutEmerald, int coutRuby, int coutOnyx) {
+        resources = new int[Resource.values().length];
+        setNbResource("DIAMOND", coutDiamond);
+        setNbResource("SAPPHIRE", coutSapphire);
+        setNbResource("EMERALD", coutEmerald);
+        setNbResource("RUBY", coutRuby);
+        setNbResource("ONYX", coutOnyx);
+        }
+    
+    public int[] getResources() {
+        return resources;
     }
 
     /**
-     * Renvoie type de la carte (la ressource 
+     * Renvoie la quantité disponible d'un type de ressource, passé en paramètre
      */
-    public Resource getResourceType(){
-        return resourceType;
+    public int getNbResource(String resource) {
+        int result = 0;
+        if (resource.equals("DIAMOND")) {
+            result = resources[0];
+        }
+        if (resource.equals("SAPPHIRE")) {
+            result = resources[1];
+        }
+        if (resource.equals("EMERALD")) {
+            result = resources[2];
+        }
+        if (resource.equals("RUBY")) {
+            result = resources[3];
+        }
+        if (resource.equals("ONYX")) {
+            result = resources[4];
+        }
+        return result;
     }
     
+    /**
+     * Réécriture de getNbResource, qui prends en paramètre un type de ressource
+     */
+    public int getNbResource(Resource resource) {
+        return resources[resource.ordinal()];
+    }    
     
-    public String[] toStringArray(){
-        /** EXAMPLE
-         * ┌────────┐
-         * │①    ♠S│
-         * │        │
-         * │        │
-         * │2 ♠S    │
-         * │2 ♣E    │
-         * │3 ♥R    │
-         * └────────┘
-         */
-        String pointStr = "  ";
-        
-        if(getPoints()>0){
-            pointStr = new String(new int[] {getPoints()+9311}, 0, 1);
-        }
-        String[] cardStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510",
-                            "\u2502"+pointStr+"    "+resourceType.toSymbol()+"\u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2502        \u2502",
-                            "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"};
-        //update cost of the repr
-        int i = 6;
-             
-        for(Resource res:Resource.values()){ //-- parcourir l'ensemble des resources (res)en utilisant l'énumération Resource
-            if(getCost().getNbResource(res)>0){
-                cardStr[i] = "\u2502"+getCost().getNbResource(res)+" "+res.toSymbol()+"    \u2502";
-                i--;
+    /**
+     * Change la valeur d'une ressource, passée en paramètre par un entier positif ou nul, passé en paramètre.
+     */
+    public void setNbResource(String resource, int quantity) {
+        if (quantity > 0) {
+            if (resource.equals("DIAMOND")) {
+                resources[0] = quantity;
             }
-        } 
-        return cardStr;
-    }
-
-    public static String[] noCardStringArray(){
-        /** EXAMPLE
-         * ┌────────┐
-         * │ \    / │
-         * │  \  /  │
-         * │   \/   │
-         * │   /\   │
-         * │  /  \  │
-         * │ /    \ │
-         * └────────┘
-         */
-        String[] cardStr = {"\u250C\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2510",
-                            "\u2502 \\    / \u2502",
-                            "\u2502  \\  /  \u2502",
-                            "\u2502   \\/   \u2502",
-                            "\u2502   /\\   \u2502",
-                            "\u2502  /  \\  \u2502",
-                            "\u2502 /    \\ \u2502",
-                            "\u2514\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2518"};
-        
-        return cardStr;
-    }
-
-    public String toString(){
-        String cardStr = "";
-            
-        cardStr = getPoints()+"pts, type "+resourceType.toSymbol()+" | coût: ";
-        for(Resource res:Resource.values()){ //-- parcourir l'ensemble des resources (res) en utilisant l'énumération Resource
-            if(getCost().getNbResource(res)>0){
-                cardStr += getCost().getNbResource(res)+res.toSymbol()+" ";
+            if (resource.equals("SAPPHIRE")) {
+                resources[1] = quantity;
+            }
+            if (resource.equals("EMERALD")) {
+                resources[2] = quantity;
+            }
+            if (resource.equals("RUBY")) {
+                resources[3] = quantity;
+            }
+            if (resource.equals("ONYX")) {
+                resources[4] = quantity;
             }
         }
-        
-        return cardStr;
+    }
+
+    /**
+     * Met a jour une ressource passée en paramètre, avec un entier passé en paramètre.
+     * Vérifie que la nouvelle valeur de la ressource est positive ou nulle.
+     */
+    public void updateNbResource(String resource, int quantity) {
+        if (resource.equals("DIAMOND")) {
+            if (resources[0] + quantity >= 0) {
+                resources[0] += quantity;
+            }
+        }
+        if (resource.equals("SAPPHIRE")) {
+            if (resources[1] + quantity >= 0) {
+                resources[1] += quantity;
+            }
+        }
+        if (resource.equals("EMERALD")) {
+            if (resources[2] + quantity >= 0) {
+                resources[2] += quantity;
+            }
+        }
+        if (resource.equals("RUBY")) {
+            if (resources[3] + quantity >= 0) {
+                resources[3] += quantity;
+            }
+        }
+        if (resource.equals("ONYX")) {
+            if (resources[4] + quantity >= 0) {
+                resources[4] += quantity;
+            }
+        }
+    
+    }
+
+    /**
+     * Renvoie une liste contenant les ressources pour lesquelles le quantité est supérieure à zéro
+     */
+    public ArrayList<Resource> getAvailableResources() {
+        ArrayList<Resource> result = new ArrayList<Resource>();
+        for (int i = 0; i < resources.length; i++) {
+            if (resources[i] > 0) {
+                result.add(Resource.values()[i]);
+            }
+        }
+        return result;
     }
 }
+
