@@ -1,4 +1,4 @@
-    public class DevCard implements Displayable {
+public class DevCard implements Displayable {
     private int niveau;
     private Resources cost;
     private int points;
