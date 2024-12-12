@@ -1,4 +1,4 @@
-
+import java.util.*;
 public class DumbRobotPlayer extends Player
 {
     public DumbRobotPlayer(int id, String name){
@@ -14,39 +14,50 @@ public class DumbRobotPlayer extends Player
                 }
             }
         }
+        String resourcetype = "DIAMOND";
         for(int k = 0; k < 5; k++){
             if(getAvailableResources().getNbResource(board.getAvailableResources().get(k)) >= 4){
                 if (k == 0 ){
-                    String resourceType = "DIAMOND";
+                    resourcetype = "DIAMOND";
                 }
                 if (k == 1 ){
-                    String resourceType = "SAPPHIRE";
+                    resourcetype = "SAPPHIRE";
                 }
                 if (k == 2 ){
-                    String resourceType = "EMERALD";
+                    resourcetype = "EMERALD";
                 }
                 if (k == 3 ){
-                    String resourceType = "RUBY";
+                    resourcetype = "RUBY";
                 }
                 if (k == 4 ){
-                    String resourceType = "ONYX";
+                    resourcetype = "ONYX";
                 }
-                PickSameTokensAction psta = new PickSameTokensAction(resourceType);
+                PickSameTokensAction psta = new PickSameTokensAction(resourcetype);
                 return psta;
                 }
             }
-        
-        String type1 = "DIAMOND";
-        String type2 = "SAPPHIRE";
-        String type3 = "EMERALD";
-        
-            if(){
-            PickDiffTokensAction pdta = new PickDiffTokensAction();
-            return pdta;
+        int[] r=board.getResourcesOnBoard().getResources();
+        ArrayList<String> type=new ArrayList<String>();
+        for(int i=0;i<5;i++){
+            if(r[i]>0){
+                if(i==0){
+                    type.add("DIAMOND");
+                }
+                if(i==1){
+                    type.add("SAPPHIRE");
+                }
+                if(i==2){
+                    type.add("EMERALD");
+                }
+                if(i==3){
+                    type.add("RUBY");
+                }
+                if(i==4){
+                    type.add("ONYX");
+                }
+            }
         }
-        else{
-            PassAction pa = new PassAction();
-            return pa;
-        }
+        PassAction pa = new PassAction();
+        return pa;        
     }
 }
