@@ -1,25 +1,25 @@
 
-/**
- * Décrivez votre classe BuyCardAction ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
 public class BuyCardAction implements Action
 {
-    private Player joueur;
-    private Board plateau;
+    public DevCard carte;
     
-    public BuyCardAction(Player joueur,Board plateau){
-        this.joueur=joueur;
-        this.plateau=plateau;
+    public BuyCardAction(DevCard carte){
+        this.carte=carte;
     }
     
-    public void process(){
+    public void process(Player joueur,Board plateau){
+        plateau.updateCard(carte);
+        joueur.addPurchasedCard(carte);
+        int[] couts= carte.getCost().getResources();
+        joueur.updateNbResource("DIAMOND",-couts[0]);
+        joueur.updateNbResource("SAPPHIRE",-couts[1]);
+        joueur.updateNbResource("EMERALD",-couts[2]);
+        joueur.updateNbResource("RUBY",-couts[3]);
+        joueur.updateNbResource("ONYX",-couts[4]);
         
     }
     
     public String toString(){
-        return null;
+        return "Vous avez acheté "+carte+" !";
     }
 }
