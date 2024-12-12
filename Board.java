@@ -79,7 +79,9 @@ public class Board implements Displayable {
             }
         }
     }
-    
+    public Resources getResourcesOnBoard(){
+        return resourcesOnBoard;
+    }
     /**
      * Renvoie le nombre de jetons d'une ressource donnée.
      */
