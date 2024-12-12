@@ -65,7 +65,6 @@ public class Game {
         display.outBoard.clean();
         display.outBoard.println(String.join("\n", mainDisplay));
     }
-    
 
     public void play(){
         while(!isGameOver()){
@@ -82,11 +81,12 @@ public class Game {
 
     private void move(Player player){
 
-        player.choosAction(board);
+        player.chooseAction(board);
     }
 
     private void discardToken(Player player){
-        DiscardTokensAction discard=new DiscardTokensAction();
+        Resources r=new Resources();
+        DiscardTokensAction discard=new DiscardTokensAction(r);
         discard.process(player,board);
     }
 
@@ -112,10 +112,10 @@ public class Game {
         }else{
             String gagnant="";
             for(int i=1; i<gagnants.size();i++){
-                if(gagnants.get(i).getNbPurchasedCards()<gagnants.get(i-1).getNbPurchasedCards()){
-                    gagnant=gagnants.get(i).getName();
+                if(players.get(i).getNbPurchasedCards()<players.get(i-1).getNbPurchasedCards()){
+                    gagnant=gagnants.get(i);
                 }else{
-                    gagnant=gagnants.get(i-1).getName();
+                    gagnant=gagnants.get(i-1);
                 }
             }
             System.out.println(gagnant);
