@@ -113,20 +113,23 @@ public class Board implements Displayable {
     }
     
     /**
-     * Trouve la carte donnée en paramètre parmi les cartes visibles et la remplace par le carte du paquet.
+     * Trouve la carte donnée en paramètre parmi les cartes visibles et la remplace par la carte du paquet.
      */
-    public void updateCard(DevCard card) {
+    public DevCard updateCard(DevCard card) {
+        DevCard result = null;
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 4; j++) {
                 if (visibleCards[i][j].equals(card)) {
                     if (stackCards.get(card.getNiveau()).isEmpty()) {
                         visibleCards[i][j] = null;
                     } else if (!(stackCards.get(card.getNiveau()).isEmpty())) {
+                        result = visibleCards[i][j];
                         visibleCards[i][j] = stackCards.get(card.getNiveau()).pop();
                     }
                 }
             }
         }
+        return result;
     }
 
     /**
