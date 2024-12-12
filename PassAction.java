@@ -1,33 +1,10 @@
 
-/**
- * Décrivez votre classe PassAction ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
-public class PassAction
+public class PassAction implements Action
 {
-    // variables d'instance - remplacez l'exemple qui suit par le vôtre
-    private int x;
-
-    /**
-     * Constructeur d'objets de classe PassAction
-     */
-    public PassAction()
-    {
-        // initialisation des variables d'instance
-        x = 0;
+    public void process(Player joueur, Board board){
+        
     }
-
-    /**
-     * Un exemple de méthode - remplacez ce commentaire par le vôtre
-     *
-     * @param  y   le paramètre de la méthode
-     * @return     la somme de x et de y
-     */
-    public int sampleMethod(int y)
-    {
-        // Insérez votre code ici
-        return x + y;
+    public String toString(){
+        return "Vous avez passé votre tour !";
     }
 }
