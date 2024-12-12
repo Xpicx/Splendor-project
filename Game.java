@@ -31,7 +31,9 @@ public class Game {
     }
 
     public Game(int nbOfPlayers) throws IllegalArgumentException{
+        board=new Board(nbOfPlayers);
         players=new ArrayList<Player>();
+        
         if (nbOfPlayers<2 || nbOfPlayers>4){
             throw new IllegalArgumentException();
         }else{
