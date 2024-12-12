@@ -1,10 +1,14 @@
 
-public class PassAction implements Action
+/**
+ * Décrivez votre interface Action ici.
+ *
+ * @author  (votre nom)
+ * @version (un numéro de version ou une date)
+ */
+
+public interface Action
 {
-    public void process(Player joueur, Board board){
-        
-    }
-    public String toString(){
-        return "Vous avez passé votre tour !";
-    }
+    void process(Player joueur,Board plateau);
+    
+    String toString();
 }
