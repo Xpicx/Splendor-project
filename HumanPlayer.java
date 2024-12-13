@@ -18,29 +18,29 @@ public class HumanPlayer extends Player
         Action result = null;
         
         //Choix que peut faire le joueur
-        while(choix!=1 && choix!=2 && choix!=3 && choix!=4){
+        while (choix!=1 && choix!=2 && choix!=3 && choix!=4) {
             System.out.println("Choisir un chiffre entre 1 et 4");
             choix=scanner.nextInt();
         }
         
-        if(choix==1){
+        if (choix == 1) {
             System.out.println("Veuiller entrer un type de ressource");
-            String choixRessource=scanner.nextLine();
+            String choixRessource = scanner.nextLine();
             while(choixRessource.equals("DIAMOND") && choixRessource.equals("SAPHIRE") && choixRessource.equals("EMERALD") && choixRessource.equals("RUBY") && choixRessource.equals("ONYX") ){
                 System.out.println("Veuiller choisir un type de ressource");
                 choix=scanner.nextInt();
             }
-            result = new PickSameTokensAction(choixRessource);
+            result = new PickSameTokensAction(Resource.valueOf(choixRessource));
         }
            
         if(choix==2){
-            ArrayList<String> choixResources = new ArrayList<String>();
+            ArrayList<Resource> choixResources = new ArrayList<Resource>();
             while (choixResources.size() < 4) { 
                 System.out.println("Veuiller entrer 3 types de ressource :");
                 String choixRessource=scanner.nextLine();
                 while(choixRessource.equals("DIAMOND") && choixRessource.equals("SAPHIRE") && choixRessource.equals("EMERALD") && choixRessource.equals("RUBY") && choixRessource.equals("ONYX") ){
                     System.out.println("Veuiller choisir 3 types de ressource");
-                    choixResources.add(choixRessource);
+                    choixResources.add(Resource.valueOf(choixRessource));
                 }
             }
             result = new PickDiffTokensAction(choixResources.get(0), choixResources.get(1),choixResources.get(2));
@@ -58,5 +58,19 @@ public class HumanPlayer extends Player
             result = new PassAction();
         }
         return result;
+    }
+    
+    public Resources chooseDiscardingTokens(){
+        Scanner scanner=new Scanner(System.in);
+        Resources tokensToDiscard = null;
+        while (super.getNbTokens()> 10) { 
+            System.out.println("Veuiller choisir un jeton à retirer: ");
+            String tokenToDiscard=scanner.nextLine();
+            while(tokenToDiscard.equals("DIAMOND") && tokenToDiscard.equals("SAPHIRE") && tokenToDiscard.equals("EMERALD") && tokenToDiscard.equals("RUBY") && tokenToDiscard.equals("ONYX") ){
+                System.out.println("Veuiller choisir 3 types de ressource");
+                tokensToDiscard.updateNbResource(Resource.valueOf(tokenToDiscard), 1);
+            }
+        }
+        return tokensToDiscard;
     }
 }

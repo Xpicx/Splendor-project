@@ -14,12 +14,9 @@ public class DiscardTokensAction implements Action
     }
     
     public void process(Player joueur,Board plateau){
-        int[] couts= discardRessources.getResources();
-        joueur.updateNbResource("DIAMOND",-couts[0]);
-        joueur.updateNbResource("SAPPHIRE",-couts[1]);
-        joueur.updateNbResource("EMERALD",-couts[2]);
-        joueur.updateNbResource("RUBY",-couts[3]);
-        joueur.updateNbResource("ONYX",-couts[4]);
+        for (Resource resource : Resource.values()) {
+            joueur.updateNbResource(resource, -discardRessources.getNbResource(resource));
+        }
     }
     
     public String toString(){

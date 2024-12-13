@@ -31,8 +31,8 @@ public class Game {
     }
 
     public Game(int nbOfPlayers) throws IllegalArgumentException{
-        board=new Board(nbOfPlayers);
-        players=new ArrayList<Player>();
+        board = new Board(nbOfPlayers);
+        players = new ArrayList<Player>();
         
         if (nbOfPlayers<2 || nbOfPlayers>4){
             throw new IllegalArgumentException();
@@ -40,7 +40,7 @@ public class Game {
             HumanPlayer human=new HumanPlayer(1,"Humain");
 
             //Créer un nombre n de robot en fonction du nombre de joueur
-            for (int i =0;i<nbOfPlayers-1;i++){
+            for (int i = 0; i <= nbOfPlayers-1; i++){
                 DumbRobotPlayer robot=new DumbRobotPlayer(i,"Robot"+i); 
                 players.add(robot);
             }
@@ -70,19 +70,16 @@ public class Game {
 
     public void play(){
         while(!isGameOver()){
-            for (int i=0;i<players.size();i++){
-
-                if (players.get(i).getNbTokens()<=10){  
-                    move(players.get(i));
-                }else{
-                    discardToken(players.get(i));
+            for (Player player : players) {
+                move(player);
+                if (player.getNbTokens() > 10) {
+                    discardToken(player);
                 }
             }
         }
     }
 
     private void move(Player player){
-
         player.chooseAction(board);
     }
 

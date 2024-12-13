@@ -8,13 +8,13 @@
 public class PickSameTokensAction implements Action
 {
 
-    private String type;
+    private Resource type;
     
     
     /**
      * Constructeur d'objets de classe PickSameTokensAction
      */
-    public PickSameTokensAction(String type)
+    public PickSameTokensAction(Resource type)
     {
         this.type=type;
         

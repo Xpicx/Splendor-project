@@ -47,9 +47,10 @@ public class Board implements Displayable {
         for (int i=0;i<98;i++) {
             ligneFichier=sc.nextLine();
             String infoCarte[]=ligneFichier.split(",");
+            
             //on ignore les nobles dans cette implémentation
             if(!(infoCarte[7].equals("NOBLE"))) { 
-                DevCard carte=new DevCard(Integer.parseInt(infoCarte[0]),Integer.parseInt(infoCarte[1]),Integer.parseInt(infoCarte[2]),Integer.parseInt(infoCarte[3]),Integer.parseInt(infoCarte[4]),Integer.parseInt(infoCarte[5]),Integer.parseInt(infoCarte[6]),infoCarte[7]);
+                DevCard carte=new DevCard(Integer.parseInt(infoCarte[0]),Integer.parseInt(infoCarte[1]),Integer.parseInt(infoCarte[2]),Integer.parseInt(infoCarte[3]),Integer.parseInt(infoCarte[4]),Integer.parseInt(infoCarte[5]),Integer.parseInt(infoCarte[6]),Resource.valueOf(infoCarte[7]));
                 pileCartes.add(carte);  
             }
         }
@@ -85,21 +86,21 @@ public class Board implements Displayable {
     /**
      * Renvoie le nombre de jetons d'une ressource donnée.
      */
-    public int getNbResource(String resource) {
+    public int getNbResource(Resource resource) {
         return resourcesOnBoard.getNbResource(resource);
     }
     
     /**
      * Change le nombre de jetons d'une ressource donnée par un entier donné.
      */
-    public void setNbResource(String resource, int value) {
+    public void setNbResource(Resource resource, int value) {
         resourcesOnBoard.setNbResource(resource, value);
     }
     
     /**
      * Ajoute le nombre de jetons d'une ressource donnée par un entier donné.
      */
-    public void updateNbResource(String resource, int value) {
+    public void updateNbResource(Resource resource, int value) {
         resourcesOnBoard.updateNbResource(resource, value);
     }
     

@@ -1,21 +1,12 @@
-
-/**
- * Décrivez votre classe PickDiffTokensAction ici.
- *
- * @author (votre nom)
- * @version (un numéro de version ou une date)
- */
-public class PickDiffTokensAction implements Action
-{
-    private String type1;
-    private String type2;
-    private String type3;
-
+public class PickDiffTokensAction implements Action {
+    private Resource type1;
+    private Resource type2;
+    private Resource type3;
 
     /**
      * Constructeur d'objets de classe PickDiffTokensAction
      */
-    public PickDiffTokensAction(String type1,String type2,String type3)
+    public PickDiffTokensAction(Resource type1,Resource type2,Resource type3)
     {
         this.type1=type1;
         this.type2=type2;

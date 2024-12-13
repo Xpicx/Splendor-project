@@ -56,11 +56,11 @@ public abstract class Player implements Displayable {
     
     public int getNbTokens(){
         int res = 0;
-        res += resources.getNbResource("DIAMOND");
-        res += resources.getNbResource("SAPPHIRE");
-        res += resources.getNbResource("EMERALD");
-        res += resources.getNbResource("ONYX");
-        res += resources.getNbResource("RUBY");  
+        res += resources.getNbResource(Resource.DIAMOND);
+        res += resources.getNbResource(Resource.SAPPHIRE);
+        res += resources.getNbResource(Resource.EMERALD);
+        res += resources.getNbResource(Resource.ONYX);
+        res += resources.getNbResource(Resource.RUBY);  
         return res;
         
     }
@@ -69,7 +69,7 @@ public abstract class Player implements Displayable {
         return purchasedCards.size();
     }
     
-    public int getNbResource(String resource){
+    public int getNbResource(Resource resource){
         return resources.getNbResource(resource);
     }
     
@@ -89,7 +89,7 @@ public abstract class Player implements Displayable {
         return res;
     }
     
-    public void updateNbResource(String type, int i){
+    public void updateNbResource(Resource type, int i){
         resources.updateNbResource(type, i);
     }
     
@@ -102,11 +102,11 @@ public abstract class Player implements Displayable {
     }
     
     public Boolean canBuyCard(DevCard card){
-        if(card.getCost().getNbResource("DIAMOND") <= resources.getNbResource("DIAMOND") &&
-        card.getCost().getNbResource("SAPPHIRE") <= resources.getNbResource("SAPPHIRE" ) &&
-        card.getCost().getNbResource("EMERALD") <= resources.getNbResource("EMERALD") &&
-        card.getCost().getNbResource("ONYX") <= resources.getNbResource("ONYX") &&
-        card.getCost().getNbResource("RUBY") <= resources.getNbResource("RUBY")){
+        if(card.getCost().getNbResource(Resource.DIAMOND) <= resources.getNbResource(Resource.DIAMOND) &&
+        card.getCost().getNbResource(Resource.SAPPHIRE) <= resources.getNbResource(Resource.SAPPHIRE) &&
+        card.getCost().getNbResource(Resource.EMERALD) <= resources.getNbResource(Resource.EMERALD) &&
+        card.getCost().getNbResource(Resource.ONYX) <= resources.getNbResource(Resource.ONYX) &&
+        card.getCost().getNbResource(Resource.RUBY) <= resources.getNbResource(Resource.RUBY)){
             return true;
         }
         else{
@@ -115,4 +115,5 @@ public abstract class Player implements Displayable {
     }
     
     public abstract Action chooseAction(Board board);
+    public abstract Resources chooseDiscardingTokens();
 }
